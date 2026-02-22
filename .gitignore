@@ -22,3 +22,21 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment variables — never commit secrets
+.env
+.env.local
+.env.*.local
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+backend/.env
+
+# Firebase service account key
+backend/config/serviceAccountKey.json
+**/serviceAccountKey.json
+**/serviceAccountKey*.json
+
+# Build output
+backend/dist/
+
