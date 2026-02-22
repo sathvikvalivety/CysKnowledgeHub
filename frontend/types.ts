@@ -79,6 +79,7 @@ export interface InterviewExperience {
   batch: string;
   company: string;
   role: string;
+  domain: string; // e.g., "Cybersecurity", "Software Engineering", "Cloud"
   type: 'Internship' | 'Full-time' | 'On-campus' | 'Off-campus';
   result: 'Selected' | 'Rejected' | 'Waiting';
   difficulty: 'Easy' | 'Medium' | 'Hard';

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X, CheckCircle, AlertCircle } from 'lucide-react';
+import { INTERVIEW_DOMAINS } from '../constants';
 
 interface ContributeExperienceModalProps {
     onClose: () => void;
@@ -14,6 +15,7 @@ export const ContributeExperienceModal: React.FC<ContributeExperienceModalProps>
     const [formData, setFormData] = useState({
         company: '',
         role: '',
+        domain: 'Software Engineering',
         type: 'Full-time',
         result: 'Waiting',
         difficulty: 'Medium',
@@ -99,6 +101,15 @@ export const ContributeExperienceModal: React.FC<ContributeExperienceModalProps>
                                     <div>
                                         <label className="block text-sm font-medium text-gray-300 mb-1.5">Role Applied For *</label>
                                         <input required type="text" name="role" value={formData.role} onChange={handleInputChange} className="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-2.5 text-white focus:ring-1 focus:ring-cyan-500 focus:outline-none" placeholder="e.g. SDE Intern" />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-300 mb-1.5">Domain *</label>
+                                        <select name="domain" value={formData.domain} onChange={handleInputChange} className="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-2.5 text-white focus:ring-1 focus:ring-cyan-500 focus:outline-none appearance-none">
+                                            {INTERVIEW_DOMAINS.map(d => (
+                                                <option key={d} value={d}>{d}</option>
+                                            ))}
+                                            <option value="Other">Other</option>
+                                        </select>
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium text-gray-300 mb-1.5">Job Type</label>

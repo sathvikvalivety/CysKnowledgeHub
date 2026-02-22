@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Search, Filter, SortDesc, SlidersHorizontal, AlertCircle, ChevronDown, Check } from 'lucide-react';
-import { MOCK_INTERVIEWS } from '../constants';
+import { MOCK_INTERVIEWS, INTERVIEW_DOMAINS } from '../constants';
 import { InterviewExperienceCard } from './InterviewExperienceCard';
 import { ContributeExperienceModal } from './ContributeExperienceModal';
 import { InterviewExperience } from '../types';
@@ -11,6 +11,7 @@ export const InterviewExperiencesPage: React.FC = () => {
 
     // Filter States
     const [selectedCompanies, setSelectedCompanies] = useState<string[]>([]);
+    const [selectedDomains, setSelectedDomains] = useState<string[]>([]);
     const [selectedResults, setSelectedResults] = useState<string[]>([]);
     const [selectedDifficulties, setSelectedDifficulties] = useState<string[]>([]);
 
@@ -19,6 +20,7 @@ export const InterviewExperiencesPage: React.FC = () => {
 
     // Derive unique options from mock data
     const companies = Array.from(new Set(MOCK_INTERVIEWS.map(i => i.company)));
+    const domains = INTERVIEW_DOMAINS;
     const results = ['Selected', 'Rejected', 'Waiting'];
     const difficulties = ['Easy', 'Medium', 'Hard'];
 
@@ -47,6 +49,9 @@ export const InterviewExperiencesPage: React.FC = () => {
         if (selectedCompanies.length > 0) {
             result = result.filter(e => selectedCompanies.includes(e.company));
         }
+        if (selectedDomains.length > 0) {
+            result = result.filter(e => selectedDomains.includes(e.domain));
+        }
         if (selectedResults.length > 0) {
             result = result.filter(e => selectedResults.includes(e.result));
         }
@@ -64,7 +69,7 @@ export const InterviewExperiencesPage: React.FC = () => {
         }
 
         return result;
-    }, [searchTerm, selectedCompanies, selectedResults, selectedDifficulties, sortBy]);
+    }, [searchTerm, selectedCompanies, selectedDomains, selectedResults, selectedDifficulties, sortBy]);
 
     return (
         <div className="max-w-7xl mx-auto space-y-6 lg:space-y-8 animate-fade-in">
@@ -110,10 +115,27 @@ export const InterviewExperiencesPage: React.FC = () => {
                             <div className="space-y-2 max-h-[160px] overflow-y-auto scrollbar-hide">
                                 {companies.map(c => (
                                     <label key={c} className="flex items-center gap-3 cursor-pointer group">
+                                        <input type="checkbox" className="hidden" checked={selectedCompanies.includes(c)} onChange={() => toggleFilter(setSelectedCompanies, c)} />
                                         <div className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${selectedCompanies.includes(c) ? 'bg-cyan-500 border-cyan-500' : 'border-gray-600 group-hover:border-cyan-400'}`}>
                                             {selectedCompanies.includes(c) && <Check size={12} className="text-white" />}
                                         </div>
                                         <span className="text-sm text-gray-300 group-hover:text-white transition-colors">{c}</span>
+                                    </label>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Domain Filter */}
+                        <div className="mb-6">
+                            <h3 className="text-sm font-semibold text-gray-200 mb-3">Domain</h3>
+                            <div className="space-y-2 max-h-[160px] overflow-y-auto scrollbar-hide pr-2">
+                                {domains.map(d => (
+                                    <label key={d} className="flex items-center gap-3 cursor-pointer group">
+                                        <input type="checkbox" className="hidden" checked={selectedDomains.includes(d)} onChange={() => toggleFilter(setSelectedDomains, d)} />
+                                        <div className={`w-4 h-4 rounded border flex-shrink-0 items-center justify-center transition-colors ${selectedDomains.includes(d) ? 'bg-cyan-500 border-cyan-500' : 'border-gray-600 group-hover:border-cyan-400'}`}>
+                                            {selectedDomains.includes(d) && <Check size={12} className="text-white" />}
+                                        </div>
+                                        <span className="text-sm text-gray-300 group-hover:text-white transition-colors leading-tight">{d}</span>
                                     </label>
                                 ))}
                             </div>
@@ -125,6 +147,7 @@ export const InterviewExperiencesPage: React.FC = () => {
                             <div className="space-y-2">
                                 {results.map(r => (
                                     <label key={r} className="flex items-center gap-3 cursor-pointer group">
+                                        <input type="checkbox" className="hidden" checked={selectedResults.includes(r)} onChange={() => toggleFilter(setSelectedResults, r)} />
                                         <div className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${selectedResults.includes(r) ? 'bg-cyan-500 border-cyan-500' : 'border-gray-600 group-hover:border-cyan-400'}`}>
                                             {selectedResults.includes(r) && <Check size={12} className="text-white" />}
                                         </div>
@@ -155,10 +178,11 @@ export const InterviewExperiencesPage: React.FC = () => {
 
                     </div>
 
-                    {(selectedCompanies.length > 0 || selectedResults.length > 0 || selectedDifficulties.length > 0) && (
+                    {(selectedCompanies.length > 0 || selectedDomains.length > 0 || selectedResults.length > 0 || selectedDifficulties.length > 0) && (
                         <button
                             onClick={() => {
                                 setSelectedCompanies([]);
+                                setSelectedDomains([]);
                                 setSelectedResults([]);
                                 setSelectedDifficulties([]);
                             }}
@@ -224,7 +248,7 @@ export const InterviewExperiencesPage: React.FC = () => {
                                     We couldn't find any interview experiences matching your current filters and search term.
                                 </p>
                                 <button
-                                    onClick={() => { setSearchTerm(''); setSelectedCompanies([]); setSelectedResults([]); setSelectedDifficulties([]); }}
+                                    onClick={() => { setSearchTerm(''); setSelectedCompanies([]); setSelectedDomains([]); setSelectedResults([]); setSelectedDifficulties([]); }}
                                     className="mt-6 text-cyan-400 hover:text-cyan-300 text-sm font-bold uppercase tracking-wider"
                                 >
                                     Clear search & filters

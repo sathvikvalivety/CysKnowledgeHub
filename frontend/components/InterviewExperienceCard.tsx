@@ -51,7 +51,7 @@ export const InterviewExperienceCard: React.FC<InterviewExperienceCardProps> = (
                     </div>
                     <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-gray-400">
                         <span className="flex items-center gap-1.5"><Award size={15} className="text-cyan-500" /> {experience.role}</span>
-                        <span className="flex items-center gap-1.5"><Building2 size={15} /> {experience.type}</span>
+                        <span className="flex items-center gap-1.5"><Building2 size={15} /> {experience.domain}</span>
                         <span className="flex items-center gap-1.5"><Users size={15} /> Batch {experience.batch} ({experience.studentName})</span>
                     </div>
                 </div>

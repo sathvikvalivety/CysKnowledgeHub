@@ -54,6 +54,29 @@ export const MOCK_CONTENT: ContentItem[] = [
   }
 ];
 
+export const INTERVIEW_DOMAINS = [
+  'Application Security',
+  'Network Security',
+  'Cloud Security',
+  'Endpoint Security',
+  'Data Security',
+  'Identity & Access Management (IAM)',
+  'Security Operations (SOC)',
+  'Incident Response',
+  'Digital Forensics',
+  'Malware Analysis',
+  'Penetration Testing',
+  'Red Teaming',
+  'Vulnerability Management',
+  'Threat Intelligence',
+  'Governance, Risk & Compliance (GRC)',
+  'Security Architecture',
+  'DevSecOps',
+  'Cryptography',
+  'OT / ICS Security',
+  'IoT Security'
+];
+
 export const MOCK_INTERVIEWS: InterviewExperience[] = [
   {
     id: 'i1',
@@ -61,7 +84,8 @@ export const MOCK_INTERVIEWS: InterviewExperience[] = [
     batch: '2024',
     company: 'Amazon',
     role: 'SDE Intern',
-    type: 'On-campus',
+    domain: 'Software Engineering',
+    type: 'Internship',
     result: 'Selected',
     difficulty: 'Hard',
     date: 'Jan 15, 2024',
@@ -150,10 +174,11 @@ export const MOCK_INTERVIEWS: InterviewExperience[] = [
   {
     id: 'i2',
     studentName: 'Priya Mehta',
-    batch: '2023',
+    batch: '2024',
     company: 'CrowdStrike',
-    role: 'Threat Hunter Intern',
-    type: 'Off-campus',
+    role: 'Cloud Security Engineer',
+    domain: 'Cybersecurity',
+    type: 'Full-time',
     result: 'Rejected',
     difficulty: 'Medium',
     date: 'Dec 05, 2023',
@@ -222,10 +247,11 @@ export const MOCK_INTERVIEWS: InterviewExperience[] = [
   {
     id: 'i3',
     studentName: 'Rahul Sharma',
-    batch: '2024',
+    batch: '2025',
     company: 'Flipkart',
-    role: 'SDE-1',
-    type: 'On-campus',
+    role: 'SDE Intern (FDP)',
+    domain: 'Software Engineering',
+    type: 'Internship',
     result: 'Selected',
     difficulty: 'Hard',
     date: 'August 22, 2024',
@@ -322,6 +348,7 @@ export const MOCK_INTERVIEWS: InterviewExperience[] = [
     batch: '2023',
     company: 'Palo Alto Networks',
     role: 'Security Engineer intern',
+    domain: 'Cybersecurity',
     type: 'Off-campus',
     result: 'Waiting',
     difficulty: 'Medium',
